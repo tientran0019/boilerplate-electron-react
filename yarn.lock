@@ -1044,15 +1044,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-11.11.7.tgz#f1c35a906b82adae76ede5ab0d2088e58fa37843"
   integrity sha512-bHbRcyD6XpXVLg42QYaQCjvDXaCFkvb3WbCIxSDmhGbJYVroxvYzekk9QGg1beeIawfvSLkdZpP0h7jxE4ihnA==
 
-"@types/node@^10.12.19":
+"@types/node@^10.12.18", "@types/node@^10.12.19":
   version "10.14.4"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.14.4.tgz#1c586b991457cbb58fef51bc4e0cfcfa347714b5"
   integrity sha512-DT25xX/YgyPKiHFOpNuANIQIVvYEwCWXgK2jYYwqgaMrYE6+tq+DtmMwlD3drl6DJbUwtlIDnn0d7tIn/EbXBg==
-
-"@types/node@^8.0.24":
-  version "8.10.45"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.45.tgz#4c49ba34106bc7dced77ff6bae8eb6543cde8351"
-  integrity sha512-tGVTbA+i3qfXsLbq9rEq/hezaHY55QxQLeXQL2ejNgFAxxrgu8eMmYIOsRcl7hN1uTLVsKOOYacV/rcJM3sfgQ==
 
 "@types/q@^1.5.1":
   version "1.5.2"
@@ -4640,12 +4635,12 @@ electron-updater@^4.0.6:
     semver "^5.6.0"
     source-map-support "^0.5.9"
 
-electron@^3.0.10:
-  version "3.1.7"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-3.1.7.tgz#2041031db272e88f167b2e5fe2de9eecabcf4632"
-  integrity sha512-rvmucnAsB4hQVdD0fOd1ad7+5u/BX1ak6emcSyPsLUk6rTqvVfOMk5ryC19h7Yd/5X8NWvCGkgYzSyQbgAJngA==
+electron@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-4.1.1.tgz#dc9343ba829cabbf01364761e72796f766704184"
+  integrity sha512-ABIEXTw55eiCW30a6F8fWLHL0QeH+yK3JgZpvTZZWLnkO5/SmG38avMxRhKOUQstRpYb+EEpE8IAM2DVOaTvtw==
   dependencies:
-    "@types/node" "^8.0.24"
+    "@types/node" "^10.12.18"
     electron-download "^4.1.0"
     extract-zip "^1.0.3"
 

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* --------------------------------------------------------
 * Copyright Wata Solutions
 *
@@ -42,9 +43,8 @@ const installExtensions = async () => {
 	const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
 
 	return Promise.all(
-		extensions.map(name =>
-			installer.default(installer[name], forceDownload)
-		)
+		extensions.map(name => installer.default(installer[name], forceDownload),
+		),
 	).catch(console.log);
 };
 
@@ -68,17 +68,20 @@ app.on('ready', async () => {
 		await installExtensions();
 	}
 
+	// docs config: https://github.com/electron/electron/blob/master/docs/api/browser-window.md
 	mainWindow = new BrowserWindow({
 		show: false,
 		width: 1024,
-		height: 728
+		height: 728,
+		// titleBarStyle: 'hidden',
 	});
 
 	mainWindow.loadURL(`file://${__dirname}/app.html`);
 
 	// @TODO: Use 'ready-to-show' event
 	//        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
-	mainWindow.webContents.on('did-finish-load', () => {
+	// mainWindow.webContents.on('did-finish-load', () => {
+	mainWindow.once('ready-to-show', () => {
 		if (!mainWindow) {
 			throw new Error('"mainWindow" is not defined');
 		}

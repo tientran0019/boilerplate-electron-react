@@ -9,7 +9,7 @@ import styles from './style.scss';
 
 function mapStateToProps(state) {
 	return {
-		counter: state.counter
+		counter: state.counter,
 	};
 }
 
@@ -19,7 +19,7 @@ function mapDispatchToProps(dispatch) {
 
 @connect(
 	mapStateToProps,
-	mapDispatchToProps
+	mapDispatchToProps,
 )
 export default class Counter extends Component {
 	render() {
@@ -28,7 +28,7 @@ export default class Counter extends Component {
 			incrementIfOdd,
 			incrementAsync,
 			decrement,
-			counter
+			counter,
 		} = this.props;
 		return (
 			<div>
