@@ -1,0 +1,14 @@
+{
+    "attr-bans": [],
+    "attr-quote-style": "quoted",
+    "doctype-first": false,
+    "id-class-style": false,
+    "attr-name-style": false,
+    "attr-req-value": false,
+    "indent-style": "tabs",
+	"tag-bans": false,
+	"label-req-for": false,
+	"spec-char-escape": false,
+	"attr-no-unsafe-char": false,
+	"img-req-src": false
+}
