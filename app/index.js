@@ -11,8 +11,9 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import { configureStore, history } from 'app/redux/store/configureStore';
-import Root from 'app/containers/Root';
+import { configureStore, history } from 'app/redux/store';
+
+import App from './App';
 
 import './app.global.scss';
 
@@ -20,18 +21,18 @@ const store = configureStore();
 
 render(
 	<AppContainer>
-		<Root store={store} history={history} />
+		<App store={store} history={history} />
 	</AppContainer>,
 	document.getElementById('root'),
 );
 
 if (module.hot) {
-	module.hot.accept('./containers/Root', () => {
+	module.hot.accept('./App', () => {
 		// eslint-disable-next-line global-require
-		const NextRoot = require('./containers/Root').default;
+		const NextApp = require('./App').default;
 		render(
 			<AppContainer>
-				<NextRoot store={store} history={history} />
+				<NextApp store={store} history={history} />
 			</AppContainer>,
 			document.getElementById('root'),
 		);
