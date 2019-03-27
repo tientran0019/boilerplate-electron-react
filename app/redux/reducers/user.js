@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /*--------------------------------------------------------
  * Author Trần Đức Tiến
  * Email tientran0019@gmail.com
@@ -19,8 +20,7 @@ export const initialState = fromJS({
 		data: [],
 		loading: true,
 	},
-	view: {
-	},
+	view: {},
 });
 
 export default (state = initialState, action) => {
@@ -31,10 +31,9 @@ export default (state = initialState, action) => {
 			});
 
 		case `GET_${MODEL_NAME}_LIST_SUCCESS`: {
-			return state.update('list', (list) => {
+			return state.update('list', list => {
 				return {
-					...action.payload,
-					data: [...list.data, ...action.payload.data],
+					data: [...list.get('data'), ...action.payload],
 					loading: false,
 				};
 			});
@@ -54,46 +53,53 @@ export default (state = initialState, action) => {
 			});
 
 		case `UPDATE_${MODEL_NAME}_SUCCESS`: {
-			return state.update('list', (list) => {
-				const { id } = action.payload;
+			return state
+				.update('list', list => {
+					const { id } = action.payload;
 
-				if (list.data) {
-					const index = list.data.findIndex((row) => {
-						return row.id === id;
-					});
+					if (list.data) {
+						const index = list.data.findIndex(row => {
+							return row.id === id;
+						});
 
-					if (index >= 0) {
-						list.data[index] = { ...list.data[index], ...action.payload }; // eslint-disable-line
+						if (index >= 0) {
+							list.data[index] = {
+								...list.data[index],
+								...action.payload,
+							}; // eslint-disable-line
+						}
+						return { ...list, data: [...list.data] };
 					}
-					return { ...list, data: [...list.data] };
-				}
 
-				return initialState.get('list');
-			}).update('view', (view) => {
-				return { ...view, ...action.payload };
-			});
+					return initialState.get('list');
+				})
+				.update('view', view => {
+					return { ...view, ...action.payload };
+				});
 		}
 
 		case `DELETE_${MODEL_NAME}_SUCCESS`: {
-			return state.update('list', (list) => {
-				const { id } = action.payload;
+			return state
+				.update('list', list => {
+					const { id } = action.payload;
 
-				if (list.data) {
-					const index = list.data.findIndex((row) => {
-						return row.id === id;
-					});
+					if (list.data) {
+						const index = list.data.findIndex(row => {
+							return row.id === id;
+						});
 
-					spliceOne(list.data, index);
-					list.total = list.total - 1; // eslint-disable-line
-					list.skip = list.skip - 1; // eslint-disable-line
+						spliceOne(list.data, index);
+						list.total = list.total - 1; // eslint-disable-line
+						list.skip = list.skip - 1; // eslint-disable-line
 
-					return { ...list, data: [...list.data] };
-				}
+						return { ...list, data: [...list.data] };
+					}
 
-				return initialState.get('list');
-			}).update('view', () => {
-				return {};
-			});
+					return initialState.get('list');
+				})
+				.update('view', () => {
+					return {};
+				});
 		}
 
 		default:
