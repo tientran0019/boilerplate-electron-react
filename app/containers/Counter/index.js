@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+
 import routes from 'app/constants/routes';
 import * as CounterActions from 'app/redux/actions/counter';
 
@@ -22,6 +24,14 @@ function mapDispatchToProps(dispatch) {
 	mapDispatchToProps,
 )
 export default class Counter extends Component {
+	static propTypes = {
+		increment: PropTypes.func.isRequired,
+		incrementIfOdd: PropTypes.func.isRequired,
+		incrementAsync: PropTypes.func.isRequired,
+		decrement: PropTypes.func.isRequired,
+		counter: PropTypes.number.isRequired,
+	}
+
 	render() {
 		const {
 			increment,
@@ -30,6 +40,7 @@ export default class Counter extends Component {
 			decrement,
 			counter,
 		} = this.props;
+
 		return (
 			<div>
 				<div className={styles.backButton} data-tid="backButton">
