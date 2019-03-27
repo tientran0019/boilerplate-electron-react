@@ -6,7 +6,7 @@
 * Created: 2019-02-14 16:37:58
 *------------------------------------------------------- */
 
-import storage from 'electron-store';
+const storage = window.localStorage;
 
 const mandatory = () => {
 	throw new Error('Storage Missing parameter!');
@@ -18,14 +18,14 @@ export default class Storage {
 	}
 
 	set value(value) {
-		storage.set(this.name, value);
+		storage.setItem(this.name, value);
 	}
 
 	get value() {
-		return storage.get(this.name);
+		return storage.getItem(this.name);
 	}
 
 	destroy = () => {
-		storage.delete(this.name);
+		storage.removeItem(this.name);
 	}
 }

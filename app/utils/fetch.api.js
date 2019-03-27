@@ -11,7 +11,7 @@ import { put, call } from 'redux-saga/effects';
 import URL from 'app/constants/url';
 import ENV from 'app/constants/env';
 
-// import AuthStorage from 'app/utils/auth.storage';
+import AuthStorage from 'app/utils/auth.storage';
 import { REQUEST_ERROR } from 'app/redux/actions/type';
 
 const { API_URL } = URL;
@@ -62,10 +62,10 @@ export default function* ({ uri, params = {}, opt = {}, loading = true, uploadFi
 		options.headers = {};
 	}
 
-	// // set token
-	// if (AuthStorage.loggedIn) {
-	// 	options.headers.Authorization = AuthStorage.token;
-	// }
+	// set token
+	if (AuthStorage.loggedIn) {
+		options.headers.Authorization = AuthStorage.token;
+	}
 
 	let url = uri;
 
