@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 export default class Root extends Component {
 	static propTypes = {
 		store: PropTypes.object.isRequired,
-		history: PropTypes.func.isRequired,
+		history: PropTypes.object.isRequired,
 	}
 
 	render() {

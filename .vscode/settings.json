@@ -20,7 +20,7 @@
     ".eslintcache": true,
     "app/dist": true,
     "dist": true,
-    "app/main.prod.js": true,
+    "dist/main.prod.js": true,
     "app/main.prod.js.map": true,
     "bower_components": true,
     "dll": true,
