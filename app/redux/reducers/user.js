@@ -33,7 +33,8 @@ export default (state = initialState, action) => {
 		case `GET_${MODEL_NAME}_LIST_SUCCESS`: {
 			return state.update('list', list => {
 				return {
-					data: [...list.get('data'), ...action.payload],
+					...list,
+					data: [...list.data, ...action.payload],
 					loading: false,
 				};
 			});

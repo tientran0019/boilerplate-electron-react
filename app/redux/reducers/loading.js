@@ -7,7 +7,7 @@
 *------------------------------------------------------- */
 import { REQUEST_ERROR } from 'app/redux/actions/type';
 
-export const initialState = false;
+export const initialState = true;
 
 export default function (state = initialState, action) {
 	switch (action.type) {

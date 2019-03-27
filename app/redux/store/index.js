@@ -16,6 +16,9 @@ import reduxReset from 'redux-reset';
 import { createHashHistory } from 'history';
 import { routerMiddleware } from 'connected-react-router/immutable';
 import { Iterable } from 'immutable';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import immutableTransform from 'redux-persist-transform-immutable';
 
 import ENV from 'app/constants/env';
 import createRootReducer, { initialState } from 'app/redux/reducers';
@@ -23,22 +26,24 @@ import rootSaga from 'app/redux/sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
+const persistConfig = {
+	transforms: [immutableTransform()],
+	key: 'root',
+	storage,
+};
+
 const logger = createLogger({
 	// stateTransformer,
 	collapsed: (getState, action, logEntry) => !logEntry.error,
 	predicate: (getState, action) => !['@@redux-form/CHANGE', '@@redux-form/REGISTER_FIELD'].includes(
 		action.type,
 	),
-	stateTransformer: state => {
+	stateTransformer: (state) => {
 		const newState = {};
 
-		for (const i of Object.keys(state)) {
-			if (Iterable.isIterable(state[i])) {
-				newState[i] = state[i].toJS();
-			} else {
-				newState[i] = state[i];
-			}
-		}
+		Object.keys(state).forEach((key) => {
+			newState[key] = Iterable.isIterable(state[key]) ? state[key].toJS() : state[key];
+		});
 
 		return newState;
 	},
@@ -46,9 +51,13 @@ const logger = createLogger({
 
 export const history = createHashHistory();
 
+const rootReducer = createRootReducer(history);
+
 const router = routerMiddleware(history);
 
-export const configureStore = (state = initialState) => {
+export const configureStore = (next = f => f, state = initialState) => {
+	const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 	const composeMiddleware =
 		ENV === 'production'
 			? compose(
@@ -68,7 +77,7 @@ export const configureStore = (state = initialState) => {
 			);
 
 	const store = createStore(
-		createRootReducer(history),
+		persistedReducer,
 		state,
 		composeMiddleware,
 	);
@@ -83,5 +92,7 @@ export const configureStore = (state = initialState) => {
 		);
 	}
 
-	return store;
+	persistStore(store, {}, () => {
+		next(store);
+	});
 };
