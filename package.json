@@ -39,7 +39,6 @@
   },
   "build": {
     "productName": "Financial Plans",
-    "artifactName": "Financial Plans",
     "appId": "org.develar.financial-plans",
     "copyright": "Copyright © 2019 Creative Planning. All rights reserved",
     "files": [
