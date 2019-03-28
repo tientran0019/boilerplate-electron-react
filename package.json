@@ -1,8 +1,8 @@
 {
-  "name": "boilerplate-electron-react",
-  "productName": "ElectronReact",
+  "name": "financial-plans",
+  "productName": "Financial Plans",
   "version": "0.0.1",
-  "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
+  "description": "Creative Planning Financial Planner",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
     "build-dll": "cross-env NODE_ENV=development webpack --config ./configs/webpack.config.renderer.dev.dll.babel.js --colors",
@@ -31,9 +31,17 @@
     "test-watch": "yarn test --watch"
   },
   "main": "./dist/main.prod.js",
+  "private": true,
+  "author": {
+    "name": "Creative Planning",
+    "email": "cpi@27global.com",
+    "url": "https://creativeplanning.com/"
+  },
   "build": {
-    "productName": "ElectronReact",
-    "appId": "org.develar.ElectronReact",
+    "productName": "Financial Plans",
+    "artifactName": "Financial Plans",
+    "appId": "org.develar.financial-plans",
+    "copyright": "Copyright © 2019 Creative Planning. All rights reserved",
     "files": [
       "dist/",
       "dist/app.html",

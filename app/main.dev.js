@@ -15,6 +15,8 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from 'app/menu';
 
+import { build, version } from '../package.json';
+
 export default class AppUpdater {
 	constructor() {
 		log.transports.file.level = 'info';
@@ -47,6 +49,20 @@ const installExtensions = async () => {
 		),
 	).catch(console.log);
 };
+
+app.setName(build.productName);
+
+
+/**
+ * Config about panel
+ */
+
+app.setAboutPanelOptions({
+	version,
+	applicationName: build.productName,
+	applicationVersion: version,
+	copyright: build.copyright,
+});
 
 /**
  * Add event listeners...
