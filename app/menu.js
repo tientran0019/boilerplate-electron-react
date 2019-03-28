@@ -9,7 +9,8 @@
  * Created: 2019-03-26 15:54:17
  *------------------------------------------------------- */
 
-import { app, Menu, shell } from 'electron';
+import { app, Menu, dialog } from 'electron';
+import { build } from '../package.json';
 
 export default class MenuBuilder {
 	constructor(mainWindow) {
@@ -55,7 +56,6 @@ export default class MenuBuilder {
 	buildDarwinTemplate() {
 		const subMenuAbout = {
 			label: app.getName(),
-			role: 'appMenu',
 			submenu: [
 				{ role: 'about' },
 				{ type: 'separator' },
@@ -127,9 +127,16 @@ export default class MenuBuilder {
 			role: 'Help',
 			submenu: [
 				{
-					label: 'Learn More',
+					label: 'About ' + app.getName(),
 					click() {
-						shell.openExternal('https://creativeplanning.com/');
+						dialog.showMessageBox({
+							type: 'info',
+							title: 'About ' + app.getName(),
+							message: app.getName(),
+							detail: `Version ${app.getVersion()} (${app.getVersion()}) \n${
+								build.copyright
+							}`,
+						});
 					},
 				},
 			],
@@ -146,22 +153,6 @@ export default class MenuBuilder {
 
 	buildDefaultTemplate() {
 		const templateDefault = [
-			{
-				label: '&File',
-				submenu: [
-					{
-						label: '&Open',
-						accelerator: 'Ctrl+O',
-					},
-					{
-						label: '&Close',
-						accelerator: 'Ctrl+W',
-						click: () => {
-							this.mainWindow.close();
-						},
-					},
-				],
-			},
 			{
 				label: '&View',
 				submenu:
@@ -190,7 +181,7 @@ export default class MenuBuilder {
 									this.mainWindow.toggleDevTools();
 								},
 							},
-						  ]
+						]
 						: [
 							{
 								label: 'Toggle &Full Screen',
@@ -202,7 +193,25 @@ export default class MenuBuilder {
 									);
 								},
 							},
-						  ],
+						],
+			},
+			{
+				role: 'Help',
+				submenu: [
+					{
+						label: 'About ' + app.getName(),
+						click() {
+							dialog.showMessageBox({
+								type: 'info',
+								title: 'About ' + app.getName(),
+								message: app.getName(),
+								detail: `Version ${app.getVersion()} (${app.getVersion()}) \n${
+									build.copyright
+								}`,
+							});
+						},
+					},
+				],
 			},
 		];
 

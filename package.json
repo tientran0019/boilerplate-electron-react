@@ -40,7 +40,7 @@
   "build": {
     "productName": "Financial Plans",
     "appId": "org.develar.financial-plans",
-    "copyright": "Copyright © 2019 Creative Planning. All rights reserved",
+    "copyright": "Copyright © 2019 Creative Planning.",
     "files": [
       "dist/",
       "dist/app.html",

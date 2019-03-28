@@ -1,4 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
+/* eslint global-require: off */
+
 /* --------------------------------------------------------
 * Copyright Wata Solutions
 *
@@ -6,14 +8,22 @@
 * Email tientran0019@gmail.com
 * Phone 0972970075
 *
-* Created: 2019-03-26 15:54:38
+* Created: 2019-03-28 16:56:15
 *------------------------------------------------------- */
 
-/* eslint global-require: off */
+/**
+ * This module executes inside of electron's main process. You can start
+ * electron renderer process from here and communicate with the other processes
+ * through IPC.
+ *
+ * When running `yarn build` or `yarn build-main`, this file is compiled to
+ * `./dist/main.prod.js` using webpack. This gives us some performance wins.
+ */
+
 import { app, BrowserWindow } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
-import MenuBuilder from 'app/menu';
+import MenuBuilder from './menu';
 
 export default class AppUpdater {
 	constructor() {
@@ -68,20 +78,17 @@ app.on('ready', async () => {
 		await installExtensions();
 	}
 
-	// docs config: https://github.com/electron/electron/blob/master/docs/api/browser-window.md
 	mainWindow = new BrowserWindow({
 		show: false,
 		width: 1024,
 		height: 728,
-		// titleBarStyle: 'hidden',
 	});
 
 	mainWindow.loadURL(`file://${__dirname}/app.html`);
 
 	// @TODO: Use 'ready-to-show' event
 	//        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
-	// mainWindow.webContents.on('did-finish-load', () => {
-	mainWindow.once('ready-to-show', () => {
+	mainWindow.webContents.on('did-finish-load', () => {
 		if (!mainWindow) {
 			throw new Error('"mainWindow" is not defined');
 		}
