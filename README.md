@@ -1,5 +1,5 @@
-# Financial Plans App
-Financial Plans App uses Electron, React, Redux, Redux Saga, React Router, Webpack and React Hot Loader for rapid application development
+# Boilerplate Electron React
+Boilerplate Electron React App uses Electron, React, Redux, Redux Saga, React Router, Webpack and React Hot Loader for rapid application development
 
 ## Getting Started
 
